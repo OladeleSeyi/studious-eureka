@@ -1,0 +1,69 @@
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    Properties:
+      TableName: ${self:custom.usersTableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: email_verified
+          AttributeType: S
+        - AttributeName: searchName
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: ${self:custom.usersSearchNameGSIName}
+          KeySchema:
+            - AttributeName: email_verified
+              KeyType: HASH
+            - AttributeName: searchName
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  # Set the capacity to auto-scale
+  # BillingMode: PAY_PER_REQUEST
+
+  # # ÷keep
+  # PersonsTable:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: ${self:custom.personsTableName}
+  #     AttributeDefinitions:
+  #       - AttributeName: userId
+  #         AttributeType: S
+  #       - AttributeName: leaderId
+  #         AttributeType: S
+  #     KeySchema:
+  #       - AttributeName: userId
+  #         KeyType: HASH
+  #       - AttributeName: leaderId
+  #         KeyType: RANGE
+  #     # Set the capacity based on the stage
+  #     BillingMode: PAY_PER_REQUEST
+
+  #     # Set the capacity to auto-scale
+  #     # BillingMode: PAY_PER_REQUEST
+  # # primary key is just follower id prepended with the userId in
+  # # question seperated by an underscore for the sake of uniqueness
+  # # Keep
+  # ReviewsTable:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: ${self:custom.reviewsTableName}
+  #     AttributeDefinitions:
+  #       - AttributeName: userId
+  #         AttributeType: S
+  #       - AttributeName: followerId
+  #         AttributeType: S
+  #     KeySchema:
+  #       - AttributeName: userId
+  #         KeyType: HASH
+  #       - AttributeName: followerId
+  #         KeyType: RANGE
+  #     # Set the capacity based on the stage
+  #     BillingMode: PAY_PER_REQUEST
