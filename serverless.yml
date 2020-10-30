@@ -15,10 +15,10 @@ custom:
   # commands. Or fallsback to what we have set in the provider section.
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
-  usersTableName: ${self:custom.stage}-users
-  personsTableName: ${self:custom.stage}-persons
-  reviewsTableName: ${self:custom.stage}-intel
-  usersSearchNameGSIName: ${self:custom.stage}-users-search-name-index
+  usersTableName: ${self:custom.stage}-${self:provider.stage}-users
+  personsTableName: ${self:custom.stage}-${self:provider.stage}-persons
+  sightingsTableName: ${self:custom.stage}-${self:provider.stage}-intel
+  usersSearchNameGSIName: ${self:custom.stage}-${self:provider.stage}-users-search-name-index
   # usersNameGSIName: ${self:custom.stage}-users-name-index
 
 provider:
@@ -34,16 +34,16 @@ provider:
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
   environment:
-    usersTableName: ${self:custom.usersTableName}
+    usersTableName: ${self:custom.usersTableName}-${self:provider.stage}-users
     region: ${env:REGION}
     accessKeyId: ${env:ACCESS_KEY_ID},
     secretAccessKey: ${env:SECRET_ACCESS_KEY}
     userPoolId: ${env:USER_POOL_ID}
     appClientId: ${env:APP_CLIENT_ID}
     identityPoolId: ${env:IDENTITY_POOL_ID}
-    personsTableName: ${self:custom.stage}-persons
-    reviewsTableName: ${self:custom.stage}-intel
-    usersSearchNameGSIName: ${self:custom.stage}-users-search-name-index
+    personsTableName: ${self:custom.stage}-${self:provider.stage}-persons
+    sightingsTableName: ${self:custom.stage}-${self:provider.stage}-intel
+    usersSearchNameGSIName: ${self:custom.stage}-${self:provider.stage}-users-search-name-index
 
   iamRoleStatements:
     - Effect: Allow

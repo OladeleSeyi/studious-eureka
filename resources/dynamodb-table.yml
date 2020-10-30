@@ -29,41 +29,52 @@ Resources:
   # BillingMode: PAY_PER_REQUEST
 
   # # ÷keep
-  # PersonsTable:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     TableName: ${self:custom.personsTableName}
-  #     AttributeDefinitions:
-  #       - AttributeName: userId
-  #         AttributeType: S
-  #       - AttributeName: leaderId
-  #         AttributeType: S
-  #     KeySchema:
-  #       - AttributeName: userId
-  #         KeyType: HASH
-  #       - AttributeName: leaderId
-  #         KeyType: RANGE
-  #     # Set the capacity based on the stage
-  #     BillingMode: PAY_PER_REQUEST
+  PersonsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.personsTableName}
+      AttributeDefinitions:
+        - AttributeName: personId
+          AttributeType: S
+        - AttributeName: personName
+          AttributeType: S
+        - AttributeName: creatorId # id of the post creator
+          AttributeType: S
+      KeySchema:
+        - AttributeName: personId
+          KeyType: HASH
+        - AttributeName: personName
+          KeyType: RANGE
+      # Set the capacity based on the stage
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "PersonSecondaryIndex"
+          KeySchema:
+            - AttributeName: personId
+              KeyType: HASH
+            - AttributeName: creatorId
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
 
   #     # Set the capacity to auto-scale
   #     # BillingMode: PAY_PER_REQUEST
   # # primary key is just follower id prepended with the userId in
   # # question seperated by an underscore for the sake of uniqueness
   # # Keep
-  # ReviewsTable:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     TableName: ${self:custom.reviewsTableName}
-  #     AttributeDefinitions:
-  #       - AttributeName: userId
-  #         AttributeType: S
-  #       - AttributeName: followerId
-  #         AttributeType: S
-  #     KeySchema:
-  #       - AttributeName: userId
-  #         KeyType: HASH
-  #       - AttributeName: followerId
-  #         KeyType: RANGE
-  #     # Set the capacity based on the stage
-  #     BillingMode: PAY_PER_REQUEST
+  SightingsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.sightingsTableName}
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: sightingId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: sightingId
+          KeyType: RANGE
+      # Set the capacity based on the stage
+      BillingMode: PAY_PER_REQUEST
