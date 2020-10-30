@@ -70,6 +70,12 @@ functions:
       - http:
           path: hello
           method: get
+  create:
+    handler: persons/create.main
+    events:
+      - http:
+          path: persons/create
+          method: post
 
 # Create our resources with separate CloudFormation templates
 resources:
