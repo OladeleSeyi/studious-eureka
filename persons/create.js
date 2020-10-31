@@ -1,6 +1,5 @@
-// import * as uuid from "uuid";
-import handler from "../libs/handler-lib";
 import { nanoid } from "nanoid";
+import handler from "../libs/handler-lib";
 import * as dynamoDb from "../libs/dynamodb-lib";
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -14,7 +13,12 @@ export const main = handler(async (event, context) => {
     },
   };
   try {
+    // validate
+
+    // add to database
     await dynamoDb.call("put", params);
+
+    // respond
     return params.Item;
   } catch (e) {
     throw e;
