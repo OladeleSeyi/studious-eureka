@@ -7,7 +7,7 @@ export const main = handler(async (event, context) => {
     TableName: process.env.personsTableName,
     Item: {
       personId: nanoid(),
-      creatorId: " The user' Id ", //placeholder for cognito
+      creatorId: "786if-srytdwr", //placeholder for cognito
       createdAt: Date.now(),
       ...data,
     },

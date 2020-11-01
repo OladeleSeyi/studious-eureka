@@ -43,8 +43,6 @@ Resources:
       KeySchema:
         - AttributeName: personId
           KeyType: HASH
-        - AttributeName: personName
-          KeyType: RANGE
       # Set the capacity based on the stage
       BillingMode: PAY_PER_REQUEST
       GlobalSecondaryIndexes:

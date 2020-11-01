@@ -82,6 +82,12 @@ functions:
       - http:
           path: persons/list
           method: get
+  getPerson:
+    handler: persons/get.main
+    events:
+      - http:
+          path: person/{id}
+          method: get
 
 # Create our resources with separate CloudFormation templates
 resources:
