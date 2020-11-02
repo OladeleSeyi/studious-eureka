@@ -10,7 +10,6 @@ export const main = handler(async (event, context) => {
 
   // get from database
   const result = await dynamoDb.call("get", params);
-  console.log("result", result);
 
   // check and return output
   if (!result.Item) {
