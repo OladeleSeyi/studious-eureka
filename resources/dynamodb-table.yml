@@ -36,8 +36,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: personId
           AttributeType: S
-        - AttributeName: personName
-          AttributeType: S
         - AttributeName: creatorId # id of the post creator
           AttributeType: S
       KeySchema:
@@ -48,9 +46,9 @@ Resources:
       GlobalSecondaryIndexes:
         - IndexName: "PersonSecondaryIndex"
           KeySchema:
-            - AttributeName: personId
-              KeyType: HASH
             - AttributeName: creatorId
+              KeyType: HASH
+            - AttributeName: personId
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
@@ -65,14 +63,21 @@ Resources:
     Properties:
       TableName: ${self:custom.sightingsTableName}
       AttributeDefinitions:
-        - AttributeName: userId
-          AttributeType: S
         - AttributeName: sightingId
+          AttributeType: S
+        - AttributeName: creatorId
           AttributeType: S
       KeySchema:
-        - AttributeName: userId
-          KeyType: HASH
         - AttributeName: sightingId
-          KeyType: RANGE
+          KeyType: HASH
       # Set the capacity based on the stage
       BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "SightingsTableIndex"
+          KeySchema:
+            - AttributeName: creatorId
+              KeyType: HASH
+            - AttributeName: sightingId
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL

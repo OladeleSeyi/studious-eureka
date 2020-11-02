@@ -4,7 +4,7 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.personsTableName,
     Key: {
-      personId: event.pathParameter.id,
+      personId: event.pathParameters.id,
     },
   };
 
