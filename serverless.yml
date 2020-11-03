@@ -82,12 +82,12 @@ functions:
   #     - http:
   #         path: persons/list
   #         method: get
-  # getPerson:
-  #   handler: persons/get.main
-  #   events:
-  #     - http:
-  #         path: person/{id}
-  #         method: get
+  getPerson:
+    handler: persons/get.main
+    events:
+      - http:
+          path: person/{id}
+          method: get
   # updatePerson:
   #   handler: persons/update.main
   #   events:
