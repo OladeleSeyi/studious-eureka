@@ -88,12 +88,12 @@ functions:
       - http:
           path: person/{id}
           method: get
-  # updatePerson:
-  #   handler: persons/update.main
-  #   events:
-  #     - http:
-  #         path: person/{id}
-  #         method: patch
+  updatePerson:
+    handler: persons/update.main
+    events:
+      - http:
+          path: person/{id}
+          method: patch
 
 # Create our resources with separate CloudFormation templates
 resources:
