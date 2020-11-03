@@ -45,23 +45,23 @@ provider:
     sightingsTableName: ${self:custom.stage}-${self:provider.stage}-intel
     usersSearchNameGSIName: ${self:custom.stage}-${self:provider.stage}-users-search-name-index
 
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:DescribeTable
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:BatchGetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      # Restrict our IAM role permissions to
-      # the specific table for the stage
-      Resource:
-        - "Fn::GetAtt": [UsersTable, Arn]
-        #       # allow all secondary indices on the table
-        - "Fn::Join": ["", ["Fn::GetAtt": [UsersTable, Arn], "/index/*"]]
+  # iamRoleStatements:
+  #   - Effect: Allow
+  #     Action:
+  #       - dynamodb:DescribeTable
+  #       - dynamodb:Query
+  #       - dynamodb:Scan
+  #       - dynamodb:GetItem
+  #       - dynamodb:BatchGetItem
+  #       - dynamodb:PutItem
+  #       - dynamodb:UpdateItem
+  #       - dynamodb:DeleteItem
+  #     # Restrict our IAM role permissions to
+  #     # the specific table for the stage
+  #     Resource:
+  #       - "Fn::GetAtt": [UsersTable, Arn]
+  #       #       # allow all secondary indices on the table
+  #       - "Fn::Join": ["", ["Fn::GetAtt": [UsersTable, Arn], "/index/*"]]
 
 functions:
   hello:
@@ -76,31 +76,29 @@ functions:
       - http:
           path: persons/create
           method: post
-  listPersons:
-    handler: persons/list.main
-    events:
-      - http:
-          path: persons/list
-          method: get
-  getPerson:
-    handler: persons/get.main
-    events:
-      - http:
-          path: person/{id}
-          method: get
-  updatePerson:
-    handler: persons/update.main
-    events:
-      - http:
-          path: person/{id}
-          method: patch
+  # listPersons:
+  #   handler: persons/list.main
+  #   events:
+  #     - http:
+  #         path: persons/list
+  #         method: get
+  # getPerson:
+  #   handler: persons/get.main
+  #   events:
+  #     - http:
+  #         path: person/{id}
+  #         method: get
+  # updatePerson:
+  #   handler: persons/update.main
+  #   events:
+  #     - http:
+  #         path: person/{id}
+  #         method: patch
 
 # Create our resources with separate CloudFormation templates
 resources:
   # API Gateway Errors
   - ${file(resources/api-gateway-errors.yml)}
-  # DynamoDB
-  - ${file(resources/dynamodb-table.yml)}
   # S3
   - ${file(resources/s3-bucket.yml)}
   # Cognito

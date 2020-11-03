@@ -1,26 +1,21 @@
-import { nanoid } from "nanoid";
 import handler from "../libs/handler-lib";
-import * as dynamoDb from "../libs/dynamodb-lib";
+import db from "../libs/mongodb-lib";
+import Person from "../models/Person";
+import { BadRequestError } from "../libs/errors-lib";
 export const main = handler(async (event, context) => {
+  // Connect db]
+  db.connect();
+  // Retrieve the data from the event
   const data = JSON.parse(event.body);
-  const params = {
-    TableName: process.env.personsTableName,
-    Item: {
-      personId: nanoid(),
-      creatorId: "786if-srytdwr", //placeholder for cognito
-      createdAt: Date.now(),
-      ...data,
-    },
-  };
-  try {
-    // validate
 
-    // add to database
-    await dynamoDb.call("put", params);
+  // validate the data
 
-    // respond
-    return params.Item;
-  } catch (e) {
-    throw e;
-  }
+  // save the data and return the saved data
+  const doc = new Person({ ...data });
+  const saved = await doc.save().catch((e) => {
+    throw new BadRequestError("Invalid Data ");
+  });
+  // return the data
+  db.close();
+  return saved;
 });
