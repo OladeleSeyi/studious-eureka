@@ -76,12 +76,12 @@ functions:
       - http:
           path: persons/create
           method: post
-  # listPersons:
-  #   handler: persons/list.main
-  #   events:
-  #     - http:
-  #         path: persons/list
-  #         method: get
+  listPersons:
+    handler: persons/list.main
+    events:
+      - http:
+          path: persons/list
+          method: get
   getPerson:
     handler: persons/get.main
     events:
