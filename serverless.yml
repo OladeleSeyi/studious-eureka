@@ -101,6 +101,12 @@ functions:
       - http:
           path: info/create
           method: post
+  getSighting:
+    handler: info/get.main
+    events:
+      - http:
+          path: info/{id}
+          method: get
 
 # Create our resources with separate CloudFormation templates
 resources:
