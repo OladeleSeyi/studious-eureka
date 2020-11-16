@@ -107,6 +107,13 @@ functions:
       - http:
           path: info/{id}
           method: get
+  #User routes
+  registerUser:
+    handler: users/register.main
+    events:
+      - http:
+          path: user/register
+          method: post
 
 # Create our resources with separate CloudFormation templates
 resources:
