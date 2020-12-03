@@ -12,7 +12,7 @@ export const main = handler(async (event, context) => {
   // validate the data (purposely vague)
   await validate.create(data);
 
-  save the data and return the saved data
+  // save the data and return the saved data
   const doc = new Person({ ...data });
   const saved = await doc.save().catch((e) => {
     throw new BadRequestError("Invalid Data ");
