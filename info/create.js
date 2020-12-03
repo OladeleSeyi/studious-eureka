@@ -2,6 +2,7 @@ import handler from "../libs/handler-lib";
 import db from "../libs/mongodb-lib";
 import Info from "../models/Info";
 import { BadRequestError } from "../libs/errors-lib";
+import validate from "./validation";
 
 export const main = handler(async (event, context) => {
   // Connect db
@@ -9,7 +10,8 @@ export const main = handler(async (event, context) => {
   //  retrieve the data from the event
   const data = JSON.parse(event.body);
 
-  // Validate the data
+  // Validate the data (purposely vague)
+  await validate.create(data);
 
   // Save the data
   const doc = new Info({ ...data });
