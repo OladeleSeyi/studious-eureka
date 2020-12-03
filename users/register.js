@@ -8,14 +8,14 @@ export const main = handler(async (event, context) => {
   db.connect();
   const now = new Date().toISOString();
   // check to ensure the request is authenticated
-  // if (
-  //   data.userId === "" ||
-  //   !event.requestContext.identity.cognitoAuthenticationProvider.includes(
-  //     data.userId
-  //   )
-  // ) {
-  //   throw new BadRequestError(" Sign In first Motherfucker");
-  // }
+  if (
+    data.userId === "" ||
+    !event.requestContext.identity.cognitoAuthenticationProvider.includes(
+      data.userId
+    )
+  ) {
+    throw new BadRequestError(" Sign In first Motherfucker");
+  }
 
   // Retrieve the data from the event
   const data = JSON.parse(event.body);
