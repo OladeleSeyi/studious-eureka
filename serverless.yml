@@ -75,6 +75,8 @@ functions:
     events:
       - http:
           path: persons/create
+          cors: true
+          authorizer: aws_iam
           method: post
   listPersons:
     handler: persons/list.main
@@ -88,12 +90,15 @@ functions:
       - http:
           path: person/{id}
           method: get
+          cors: true
   updatePerson:
     handler: persons/update.main
     events:
       - http:
           path: person/{id}
           method: patch
+          cors: true
+          authorizer: aws_iam
   # Sigthings and its functions
   createSighting:
     handler: info/create.main
@@ -101,6 +106,8 @@ functions:
       - http:
           path: info/create
           method: post
+          cors: true
+          authorizer: aws_iam
   getSighting:
     handler: info/get.main
     events:

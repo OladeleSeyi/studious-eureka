@@ -1,4 +1,5 @@
 import { object, string } from "yup";
+import { BadRequestError } from "../libs/errors-lib";
 const schema = {
   create: object().shape({
     creatorId: string().min(8).required(),
@@ -15,7 +16,7 @@ const validate = {
   async create(params) {
     const valid = await schema.create.isValid(params);
     if (!valid) {
-      throw new Error("Validation Error ");
+      throw new BadRequestError("Validation Error ");
     }
   },
 };

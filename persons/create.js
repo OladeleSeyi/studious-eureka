@@ -4,8 +4,10 @@ import Person from "../models/Person";
 import { BadRequestError } from "../libs/errors-lib";
 import validate from "./validation";
 export const main = handler(async (event, context) => {
-  // Connect db]
+  // Connect db
   db.connect();
+  console.log("auth", event.requestContext);
+
   // Retrieve the data from the event
   const data = JSON.parse(event.body);
 
