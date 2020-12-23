@@ -86,6 +86,7 @@ functions:
       - http:
           path: persons/list
           method: get
+          cors: true
   getPerson:
     handler: persons/get.main
     events:
@@ -116,6 +117,7 @@ functions:
       - http:
           path: info/{id}
           method: get
+          cors: true
   #User routes
   registerUser:
     handler: users/register.main
@@ -123,6 +125,8 @@ functions:
       - http:
           path: user/register
           method: post
+          cors: true
+          authorizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:
