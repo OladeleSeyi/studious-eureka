@@ -1,12 +1,12 @@
 import handler from "../libs/handler-lib";
 import db from "../libs/mongodb-lib";
 import User from "../models/User";
-import { BadRequestError, NotFoundError } from "../libs/errors-lib";
+import { BadRequestError } from "../libs/errors-lib";
 
 export const main = handler(async (event, context) => {
   // Connect db
   db.connect();
-  const now = new Date().toISOString();
+  // const now = new Date().toISOString();
   // check to ensure the request is authenticated
   if (
     data.userId === "" ||
@@ -26,6 +26,9 @@ export const main = handler(async (event, context) => {
   const saved = await doc.save().catch((e) => {
     throw new BadRequestError("Invalid Data");
   });
+
+  saved;
+
   // close the connection
   db.close();
   // return the data

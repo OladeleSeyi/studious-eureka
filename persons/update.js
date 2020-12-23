@@ -29,6 +29,7 @@ export const main = handler(async (event, context) => {
   ).catch((e) => {
     throw new BadRequestError("There has been a a problem");
   });
+  update;
 
   // close the connection
   db.close();
