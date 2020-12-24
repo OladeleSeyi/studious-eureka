@@ -20,6 +20,7 @@ export const main = handler(async (event, context) => {
     throw new BadRequestError("Invalid Data ");
   });
   // return the data
-  db.close();
+  // concurrent request clash so undo db.close()
+  // db.close();
   return saved;
 });

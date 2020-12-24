@@ -31,8 +31,10 @@ export const main = handler(async (event, context) => {
   });
   update;
 
+  // concurrent requestS clash so undo db.close()
+  // db.close();
   // close the connection
-  db.close();
+  // db.close();
 
   // return the data
   return doc;

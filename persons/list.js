@@ -6,6 +6,8 @@ export const main = handler(async (event, context) => {
   db.connect();
   const persons = await Person.find().exec();
 
-  db.close();
+  // concurrent requestS clash so undo db.close()
+  // db.close();
+  // db.close();
   return persons;
 });

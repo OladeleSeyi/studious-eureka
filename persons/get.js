@@ -17,7 +17,9 @@ export const main = handler(async (event, context) => {
     throw new NotFoundError("Record not found ");
   }
   // Close the db connection
-  db.close();
+  // concurrent requests clash so undo db.close()
+  // db.close();
+  // db.close();
   // return the results
   return doc;
 });
