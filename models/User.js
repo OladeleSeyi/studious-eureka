@@ -1,7 +1,18 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-  userId: String,
+  userId: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  cognitoId: {
+    type: String,
+    required: true,
+  },
   name: String,
   email: String,
   phoneNumber: String,
