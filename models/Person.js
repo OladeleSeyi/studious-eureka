@@ -35,6 +35,7 @@ const personSchema = new Schema({
   found: { type: Boolean, default: false },
   foundAt: String,
   comments: String,
+  photo: String,
   photos: Array,
   height: String,
   complexion: String,
