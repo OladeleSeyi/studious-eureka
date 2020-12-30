@@ -118,6 +118,13 @@ functions:
           path: info/{id}
           method: get
           cors: true
+  getPersonSightings:
+    handler: info/getPersonInfo.main
+    events:
+      - http:
+          path: info/person/{id}
+          method: get
+          cors: true
   #User routes
   registerUser:
     handler: users/register.main

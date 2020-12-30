@@ -47,6 +47,12 @@ const personSchema = new Schema({
   lga: String,
   phoneNumber: String,
   createdAt: { type: Date, default: Date.now() },
+  // info: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Info",
+  //   },
+  // ],
 });
 
 const Person = mongoose.model("person", personSchema);
