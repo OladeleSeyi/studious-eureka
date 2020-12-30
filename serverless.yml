@@ -134,6 +134,14 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
+  getUserById:
+    handler: users/getById.main
+    events:
+      - http:
+          path: user/get/{id}
+          method: get
+          cors: true
+          authorizer: aws_iam
 
 # Create our resources with separate CloudFormation templates
 resources:
