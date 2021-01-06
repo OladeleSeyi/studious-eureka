@@ -3,6 +3,7 @@ import db from "../libs/mongodb-lib";
 import Info from "../models/Info";
 import { BadRequestError } from "../libs/errors-lib";
 import validate from "./validation";
+import sendMail from "./email";
 
 export const main = handler(async (event, context) => {
   // Connect db
@@ -25,6 +26,17 @@ export const main = handler(async (event, context) => {
 
   // Notify the associated stake holders
   // send emails and push the notifications to associated
+  sendMail(
+    process.env.TMAIL,
+    {
+      person: data.person,
+      name: data.name,
+      comment: data.comment,
+      location: data.location,
+      pronoun: data.pronoun,
+    },
+    data.found
+  );
   // return the results
   return saved;
 });
