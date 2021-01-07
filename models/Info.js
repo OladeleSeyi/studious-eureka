@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const infoSchema = new Schema({
   creatorId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
     validate: {
       validator(creatorId) {
@@ -11,7 +12,8 @@ const infoSchema = new Schema({
     },
   },
   personId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    ref: "Person",
     required: true,
     validate: {
       validator(personId) {
@@ -28,6 +30,6 @@ const infoSchema = new Schema({
   createdAt: { type: Date, default: Date.now() },
 });
 
-const Info = mongoose.model("info", infoSchema);
+const Info = mongoose.model("Info", infoSchema);
 
 export default Info;

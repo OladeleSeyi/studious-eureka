@@ -49,6 +49,14 @@ const personSchema = new Schema({
   createdAt: { type: Date, default: Date.now() },
 });
 
+personSchema.virtual("infoList", {
+  ref: "Info",
+  localField: "_id",
+  foreignField: "personId",
+});
+personSchema.set("toObject", { virtuals: true });
+personSchema.set("toJSON", { virtuals: true });
+
 const Person = mongoose.model("Person", personSchema);
 
 export default Person;
