@@ -26,10 +26,16 @@ userSchema.virtual("persons", {
   foreignField: "creatorId", // is equal to foreignField
 });
 
+userSchema.virtual("infoList", {
+  ref: "Info",
+  localField: "_id",
+  foreignField: "creatorId",
+});
+
 // Set Object and Json property to true. Default is set to false
 userSchema.set("toObject", { virtuals: true });
 userSchema.set("toJSON", { virtuals: true });
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;
