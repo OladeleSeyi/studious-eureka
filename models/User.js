@@ -20,6 +20,16 @@ const userSchema = new Schema({
   profilePicture: String,
 });
 
+userSchema.virtual("persons", {
+  ref: "Person", //The Model to use
+  localField: "_id", //Find in Model, where localField
+  foreignField: "creatorId", // is equal to foreignField
+});
+
+// Set Object and Json property to true. Default is set to false
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
+
 const User = mongoose.model("user", userSchema);
 
 export default User;

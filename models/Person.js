@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 const personSchema = new Schema({
   creatorId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
     validate: {
       validator(creatorId) {
@@ -29,10 +30,9 @@ const personSchema = new Schema({
   },
   status: {
     type: String,
+    enum: ["Missing", "Arrested", "Dead", "Found"],
     default: "Missing",
   },
-  seen: { type: Boolean, default: false },
-  found: { type: Boolean, default: false },
   foundAt: String,
   comments: String,
   photo: String,
@@ -47,14 +47,8 @@ const personSchema = new Schema({
   lga: String,
   phoneNumber: String,
   createdAt: { type: Date, default: Date.now() },
-  // info: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Info",
-  //   },
-  // ],
 });
 
-const Person = mongoose.model("person", personSchema);
+const Person = mongoose.model("Person", personSchema);
 
 export default Person;
